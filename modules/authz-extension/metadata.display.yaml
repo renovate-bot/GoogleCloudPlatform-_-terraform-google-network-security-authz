@@ -1,0 +1,72 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: blueprints.cloud.google.com/v1alpha1
+kind: BlueprintMetadata
+metadata:
+  name: google-cloud-network-services-authz-extension-display
+  annotations:
+    config.kubernetes.io/local-config: "true"
+spec:
+  info:
+    title: Google Cloud Network Services AuthzExtension
+    source:
+      repo: https://github.com/viojha96/terraform-google-network-security-authz.git
+      sourceType: git
+  ui:
+    input:
+      variables:
+        authority:
+          name: authority
+          title: Authority
+        description:
+          name: description
+          title: Description
+        fail_open:
+          name: fail_open
+          title: Fail Open
+        forward_headers:
+          name: forward_headers
+          title: Forward Headers
+        labels:
+          name: labels
+          title: Labels
+        load_balancing_scheme:
+          name: load_balancing_scheme
+          title: Load Balancing Scheme
+        location:
+          name: location
+          title: Location
+        metadata:
+          name: metadata
+          title: Metadata
+        name:
+          name: name
+          title: Name
+        project_id:
+          name: project_id
+          title: Project Id
+        service:
+          name: service
+          title: Service
+        timeout:
+          name: timeout
+          title: Timeout
+        wire_format:
+          name: wire_format
+          title: Wire Format
+    runtime:
+      outputs:
+        id:
+          visibility: VISIBILITY_ROOT

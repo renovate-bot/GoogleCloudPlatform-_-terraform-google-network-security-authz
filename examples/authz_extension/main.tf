@@ -14,7 +14,7 @@ resource "google_compute_backend_service" "default" {
   project               = var.project_id
   health_checks         = [google_compute_health_check.default.id]
   load_balancing_scheme = "INTERNAL_MANAGED"
-  protocol              = "HTTP2" 
+  protocol              = "HTTP2"
 }
 
 # 2. Call your Authz Extension module

@@ -22,8 +22,8 @@
 
 # Create Authorization Extensions
 resource "google_network_services_authz_extension" "extension" {
-  for_each              = var.extensions_config
-  provider              = google-beta
+  for_each = var.extensions_config
+  provider = google-beta
 
   project               = var.project_id
   location              = var.location
@@ -39,8 +39,8 @@ resource "google_network_services_authz_extension" "extension" {
 
 # Create Authorization Policies
 resource "google_network_security_authz_policy" "policy" {
-  for_each    = var.policies_config
-  provider    = google-beta
+  for_each = var.policies_config
+  provider = google-beta
 
   project     = var.project_id
   location    = var.location

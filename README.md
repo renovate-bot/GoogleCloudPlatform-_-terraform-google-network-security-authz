@@ -1,6 +1,6 @@
 # Google Cloud Network Security Authorization Modules
 
-This repository provides a consolidated suite of Terraform modules for deploying and managing **Network Security Authorization Policies and Extensions** on Google Cloud. 
+This repository provides a consolidated suite of Terraform modules for deploying and managing **Network Security Authorization Policies and Extensions** on Google Cloud.
 
 These modules act as a unified API for enforcing access control across the 1N networking stack, encompassing Application Load Balancers (L7 XLB/ILB) and Agent Gateways. By facilitating Service Extension callouts, these modules enable the delegation of authorization decisions to custom engines for complex logic—such as AI guardrails via Model Armor—which standard RBAC cannot express.
 

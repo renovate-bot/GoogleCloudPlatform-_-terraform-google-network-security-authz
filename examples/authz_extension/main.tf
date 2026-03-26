@@ -1,3 +1,19 @@
+/**
+ * Copyright 2026 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 # 1. Create a dummy health check and backend service for the Authz Extension to reference
 resource "google_compute_health_check" "default" {
   name               = "authz-ext-hc"
@@ -14,7 +30,7 @@ resource "google_compute_backend_service" "default" {
   project               = var.project_id
   health_checks         = [google_compute_health_check.default.id]
   load_balancing_scheme = "INTERNAL_MANAGED"
-  protocol              = "HTTP2" 
+  protocol              = "HTTP2"
 }
 
 # 2. Call your Authz Extension module

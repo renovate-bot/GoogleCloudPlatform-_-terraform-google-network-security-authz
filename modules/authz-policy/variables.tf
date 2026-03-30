@@ -42,6 +42,7 @@ variable "description" {
 variable "labels" {
   description = "A map of labels to attach to the Authorization Policy."
   type        = map(string)
+  default     = {}
 }
 
 variable "custom_provider" {

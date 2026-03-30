@@ -70,7 +70,7 @@ spec:
       - name: labels
         description: A map of labels to attach to the Authorization Policy.
         varType: map(string)
-        required: true
+        defaultValue: {}
       - name: custom_provider
         description: Required if action is CUSTOM. Configuration for Authz Extension or Cloud IAP.
         varType: |-

@@ -18,19 +18,17 @@ variable "name" {
 variable "location" {
   description = "The location of the authorization policy. Can be 'global' or a region."
   type        = string
-  default     = "global"
 }
 
 variable "action" {
   description = "The action to take when a rule match is found. Possible values are 'ALLOW' or 'DENY'."
   type        = string
-  default     = "ALLOW"
 }
 
 variable "target" {
   description = "The target resources and load balancing scheme this policy applies to."
   type = object({
-    load_balancing_scheme = optional(string, "INTERNAL_MANAGED")
+    load_balancing_scheme = optional(string)
     resources             = list(string)
   })
 }
@@ -44,7 +42,6 @@ variable "description" {
 variable "labels" {
   description = "A map of labels to attach to the Authorization Policy."
   type        = map(string)
-  default     = {}
 }
 
 variable "custom_provider" {

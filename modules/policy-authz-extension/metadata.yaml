@@ -142,6 +142,6 @@ spec:
       - networksecurity.googleapis.com
     providerVersions:
       - source: hashicorp/google
-        version: ">= 5.36, < 8"
+        version: ">= 6.46, < 8"
       - source: hashicorp/google-beta
-        version: ">= 5.36, < 8"
+        version: ">= 6.46, < 8"

@@ -48,4 +48,8 @@ module "authz_extension" {
   labels = {
     environment = "test"
   }
+  fail_open             = false
+  authority             = "authz-ext.example.com"
+  load_balancing_scheme = "INTERNAL_MANAGED"
+  timeout               = "10s"
 }

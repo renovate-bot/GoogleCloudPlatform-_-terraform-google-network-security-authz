@@ -16,10 +16,11 @@ output "extension_ids" {
 }
 
 output "policy_extension_map" {
-  description = "A mapping of each authorization policy name to its designated authorization extension resource identifier."
-  value = {
+  description = "A JSON string representing a mapping of each authorization policy name to a list of its designated authorization extension resource identifiers."
+  value = jsonencode({
     for k, v in var.policies_config : k => [
       for name in try(v.extension_names, []) : google_network_services_authz_extension.extension[name].id
     ]
-  }
+  })
 }
+

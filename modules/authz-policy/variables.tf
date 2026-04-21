@@ -171,6 +171,6 @@ variable "http_rules" {
 
 variable "module_depends_on" {
   description = "A list of resources or modules that this authorization policy depends on."
-  type        = any
+  type        = list(string)
   default     = []
 }

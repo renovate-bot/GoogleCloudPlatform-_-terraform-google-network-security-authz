@@ -195,6 +195,17 @@ spec:
               }))
             }))
         defaultValue: []
+      - name: module_depends_on
+        description: "List of modules or resources this module depends on. Use this to ensure policies targeting the same gateway are created serially."
+        varType: list(any)
+        defaultValue: []
+        connections:
+          - source:
+              source: github.com/GoogleCloudPlatform/terraform-google-network-security-authz//modules/authz-policy
+              version: ">= 0.4.1"
+            spec:
+              outputExpr: "id"
+
     outputs:
       - name: create_time
         description: The timestamp when the authz policy was created.

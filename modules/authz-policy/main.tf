@@ -240,4 +240,5 @@ resource "google_network_security_authz_policy" "authz_policy" {
       }
     }
   }
+  depends_on = [var.module_depends_on]
 }

@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.5.1](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/compare/v0.5.0...v0.5.1) (2026-04-23)
+
+
+### Bug Fixes
+
+* headers_Set drift ([7259173](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/725917377cb8f4e107c7ccb08e24f63c7fde003b))
+* headers_Set drift ([0d0c79a](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/0d0c79a9c26a8be1987d46ccfbe097d20615e122))
+* headers_Set drift ([51cf73a](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/51cf73a2a5cd5eea8dc6fa2ec391518aaf526d4a))
+
 ## [0.5.0](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/compare/v0.4.1...v0.5.0) (2026-04-22)
 
 

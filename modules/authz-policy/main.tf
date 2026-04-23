@@ -197,7 +197,7 @@ resource "google_network_security_authz_policy" "authz_policy" {
               }
 
               dynamic "header_set" {
-                for_each = try(operations.value.headers, null) != null ? [1] : []
+                for_each = length(try(operations.value.headers, [])) > 0 ? [1] : []
                 content {
                   dynamic "headers" {
                     for_each = operations.value.headers

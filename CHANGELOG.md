@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.5.2](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/compare/v0.5.1...v0.5.2) (2026-04-23)
+
+
+### Bug Fixes
+
+* headers_Set drift ([b24d40f](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/b24d40f1add3d2a0081f2dde89d9834858502e54))
+* headers_Set drift ([11f0a88](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/11f0a880aa16d8c79ce63747a4b3855acefafdf6))
+
+## [0.5.1](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/compare/v0.5.0...v0.5.1) (2026-04-23)
+
+
+### Bug Fixes
+
+* headers_Set drift ([7259173](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/725917377cb8f4e107c7ccb08e24f63c7fde003b))
+* headers_Set drift ([0d0c79a](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/0d0c79a9c26a8be1987d46ccfbe097d20615e122))
+* headers_Set drift ([51cf73a](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/51cf73a2a5cd5eea8dc6fa2ec391518aaf526d4a))
+
+## [0.5.0](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/compare/v0.4.1...v0.5.0) (2026-04-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* add modules dependecny
+
+### Features
+
+* add modules dependecny ([df0972d](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/df0972db88e796c8dfb14cfe6fd7b14a47f2fa72))
+
 ## [0.4.1](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/compare/v0.4.0...v0.4.1) (2026-04-02)
 
 

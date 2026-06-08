@@ -41,13 +41,13 @@ resource "google_network_services_authz_extension" "extension" {
   location              = var.location
   name                  = each.key
   service               = each.value.backend_service
-  authority             = each.value.authority
-  load_balancing_scheme = each.value.load_balancing_scheme
-  timeout               = each.value.timeout
-  fail_open             = each.value.fail_open
-  forward_headers       = each.value.forward_headers
-  wire_format           = each.value.wire_format
-  description           = each.value.description
+  authority             = try(each.value.authority, null)
+  load_balancing_scheme = try(each.value.load_balancing_scheme, null)
+  timeout               = try(each.value.timeout, "0.1s")
+  fail_open             = try(each.value.fail_open, false)
+  forward_headers       = try(each.value.forward_headers, null)
+  wire_format           = try(each.value.wire_format, null)
+  description           = try(each.value.description, null)
   labels                = try(each.value.labels, {})
   metadata              = try(each.value.metadata, {})
 }

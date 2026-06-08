@@ -22,12 +22,18 @@ spec:
   info:
     title: Google Cloud Integrated Authorization Policies and Extensions
     source:
-      repo: https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz.git
+      repo: https://github.com/vandnagarggoogle/terraform-google-network-security-authz.git
       sourceType: git
       dir: /modules/policy-authz-extension
   ui:
     input:
       variables:
+        authz_extension_map_json:
+          name: authz_extension_map_json
+          title: Authz Extension Map Json
+        authz_policy_map_json:
+          name: authz_policy_map_json
+          title: Authz Policy Map Json
         extensions_config:
           name: extensions_config
           title: Extensions Config

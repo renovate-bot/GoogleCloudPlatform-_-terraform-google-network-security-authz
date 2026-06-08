@@ -25,7 +25,7 @@ variable "extensions_config" {
     timeout               = optional(string, "0.1s")
     fail_open             = optional(bool, false)
     forward_headers       = optional(list(string), [])
-    wire_format           = optional(string, "EXT_PROC_GRPC")
+    wire_format           = optional(string)
     metadata              = optional(map(string), {})
     model_armor_templates = optional(list(string), [])
     labels                = optional(map(string), {})

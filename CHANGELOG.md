@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.6.0](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/compare/v0.5.2...v0.6.0) (2026-06-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* agw alh compatibility
+* agw alh compatibility
+
+### Features
+
+* agw alh compatibility ([1e894b7](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/1e894b725cb22eecf6caaef7e6d7e433cd32c146))
+* agw alh compatibility ([017098d](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/017098d603ed053146452f248397249814f92a8c))
+
 ## [0.5.2](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/compare/v0.5.1...v0.5.2) (2026-04-23)
 
 

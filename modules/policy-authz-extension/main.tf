@@ -67,7 +67,7 @@ resource "google_network_security_authz_policy" "policy" {
   action         = each.value.action
   policy_profile = try(each.value.policy_profile, "REQUEST_AUTHZ")
   labels         = try(each.value.labels, {})
-  description    = format(
+  description = format(
     "%s%s",
     try(each.value.description, "Managed by ADC"),
     local.policy_predecessors[each.key] == null ? "" : " (After ${google_network_security_authz_policy.policy[local.policy_predecessors[each.key]].id})"

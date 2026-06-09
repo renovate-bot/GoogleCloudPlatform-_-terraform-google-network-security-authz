@@ -30,7 +30,7 @@ variable "extensions_config" {
     model_armor_templates = optional(list(string), [])
     labels                = optional(map(string), {})
   }))
-  default = null
+  default = {}
 }
 
 variable "policies_config" {
@@ -148,7 +148,7 @@ variable "policies_config" {
       }))
     })), [])
   }))
-  default = null
+  default = {}
 }
 
 variable "authz_policy_map_json" {

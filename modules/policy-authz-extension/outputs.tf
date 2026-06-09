@@ -20,6 +20,6 @@ output "policy_extension_map" {
   description = "Maps each policy name to its assigned extension IDs (if CUSTOM action)."
   value = {
     for k, v in local.final_policies_config : k => try(v.extension_names, [])
-    if try(v.action, "") == "CUSTOM" && ! try(v.iap_enabled, false)
+    if try(v.action, "") == "CUSTOM" && !try(v.iap_enabled, false)
   }
 }

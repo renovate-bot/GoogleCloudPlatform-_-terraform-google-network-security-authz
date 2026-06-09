@@ -25,7 +25,7 @@ spec:
       repo: https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz.git
       sourceType: git
       dir: /modules/policy-authz-extension
-    version: 0.5.2
+    version: 0.5.12
     actuationTool:
       flavor: Terraform
       version: ">= 1.3"
@@ -72,6 +72,10 @@ spec:
               timeout               = optional(string, "0.1s")
               fail_open             = optional(bool, false)
               forward_headers       = optional(list(string), [])
+              wire_format           = optional(string)
+              metadata              = optional(map(string), {})
+              model_armor_templates = optional(list(string), [])
+              labels                = optional(map(string), {})
             }))
         required: true
       - name: policies_config
@@ -79,46 +83,126 @@ spec:
         varType: |-
           map(object({
               action                = string
-              load_balancing_scheme = string
+              load_balancing_scheme = optional(string)
               target_resources      = optional(list(string), [])
               description           = optional(string, "Managed by ADC")
               extension_names       = optional(list(string), [])
               iap_enabled           = optional(bool, false)
+              policy_profile        = optional(string, "REQUEST_AUTHZ")
+              labels                = optional(map(string), {})
               http_rules = optional(list(object({
                 when = optional(string)
                 from = optional(object({
-                  not_sources = optional(list(object({
-                    ip_blocks = optional(list(object({
-                      prefix = string
-                      length = number
-                    })), [])
+                  sources = optional(object({
+                    ip_blocks = optional(list(string), [])
                     principals = optional(list(object({
-                      principal_selector = optional(string, "CLIENT_CERT_URI_SAN")
-                      principal = optional(object({
+                      selector    = optional(string, "CLIENT_CERT_URI_SAN")
+                      exact       = optional(string)
+                      prefix      = optional(string)
+                      suffix      = optional(string)
+                      contains    = optional(string)
+                      ignore_case = optional(bool, false)
+                    })), [])
+                    resources = optional(list(object({
+                      tag_value_id_set = optional(list(string))
+                      iam_service_account = optional(object({
                         exact       = optional(string)
-                        ignore_case = optional(bool, true)
+                        prefix      = optional(string)
+                        suffix      = optional(string)
+                        contains    = optional(string)
+                        ignore_case = optional(bool, false)
                       }))
                     })), [])
-                  })), [])
+                  }))
+                  not_sources = optional(object({
+                    ip_blocks = optional(list(string), [])
+                    principals = optional(list(object({
+                      selector    = optional(string, "CLIENT_CERT_URI_SAN")
+                      exact       = optional(string)
+                      ignore_case = optional(bool, false)
+                    })), [])
+                    resources = optional(list(object({
+                      tag_value_id_set = optional(list(string))
+                      iam_service_account = optional(object({
+                        exact       = optional(string)
+                        prefix      = optional(string)
+                        suffix      = optional(string)
+                        contains    = optional(string)
+                        ignore_case = optional(bool, false)
+                      }))
+                    })), [])
+                  }))
                 }))
                 to = optional(object({
-                  operations = optional(list(object({
+                  operations = optional(object({
                     methods = optional(list(string), [])
-                    paths   = optional(list(object({ exact = string })), [])
-                    header_set = optional(list(object({
-                      headers = optional(list(object({
-                        name = string
-                        value = optional(object({
-                          exact       = string
-                          ignore_case = optional(bool, true)
-                        }))
-                      })), [])
+                    paths = optional(list(object({
+                      exact       = optional(string)
+                      prefix      = optional(string)
+                      suffix      = optional(string)
+                      contains    = optional(string)
+                      ignore_case = optional(bool, false)
                     })), [])
-                  })), [])
+                    hosts = optional(list(object({
+                      exact       = optional(string)
+                      prefix      = optional(string)
+                      suffix      = optional(string)
+                      contains    = optional(string)
+                      ignore_case = optional(bool, false)
+                    })), [])
+                    headers = optional(list(object({
+                      name        = string
+                      exact       = optional(string)
+                      prefix      = optional(string)
+                      suffix      = optional(string)
+                      contains    = optional(string)
+                      ignore_case = optional(bool, false)
+                    })), [])
+                    mcp = optional(object({
+                      base_protocol_methods_option = optional(string)
+                      methods = list(object({
+                        name   = string
+                        params = optional(string)
+                      }))
+                    }))
+                  }))
+                  not_operations = optional(object({
+                    methods = optional(list(string), [])
+                    paths = optional(list(object({
+                      exact       = optional(string)
+                      prefix      = optional(string)
+                      suffix      = optional(string)
+                      contains    = optional(string)
+                      ignore_case = optional(bool, false)
+                    })), [])
+                    hosts = optional(list(object({
+                      exact       = optional(string)
+                      prefix      = optional(string)
+                      suffix      = optional(string)
+                      contains    = optional(string)
+                      ignore_case = optional(bool, false)
+                    })), [])
+                    headers = optional(list(object({
+                      name        = string
+                      exact       = optional(string)
+                      prefix      = optional(string)
+                      suffix      = optional(string)
+                      contains    = optional(string)
+                      ignore_case = optional(bool, false)
+                    })), [])
+                  }))
                 }))
               })), [])
             }))
         required: true
+      - name: authz_policy_map_json
+        description: Json encoded map of authz policy name to authz policy object.
+        varType: string
+        defaultValue: ""
+      - name: authz_extension_map_json
+        description: Json encoded map of authz extension name to authz extension object.
+        varType: string
+        defaultValue: ""
     outputs:
       - name: extension_ids
         description: The fully qualified resource names designating the authorization extensions provisioned by the module.

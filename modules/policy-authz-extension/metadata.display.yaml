@@ -28,6 +28,12 @@ spec:
   ui:
     input:
       variables:
+        authz_extension_map_json:
+          name: authz_extension_map_json
+          title: Authz Extension Map Json
+        authz_policy_map_json:
+          name: authz_policy_map_json
+          title: Authz Policy Map Json
         extensions_config:
           name: extensions_config
           title: Extensions Config

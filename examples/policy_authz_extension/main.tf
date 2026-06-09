@@ -87,30 +87,27 @@ module "policy_authz_extension" {
         {
           when = null
           to = {
-            operations = [
-              {
-                methods = []
-                paths = [
-                  {
-                    exact = "/"
-                  }
-                ]
-                # Include a dummy header to prevent empty-block drift
-                header_set = [
-                  {
-                    headers = [
-                      {
-                        name = "x-test-header"
-                        value = {
-                          exact       = "test-value"
-                          ignore_case = false
-                        }
+            operations = {
+              methods = []
+              paths = [
+                {
+                  exact = "/"
+                }
+              ]
+              header_set = [
+                {
+                  headers = [
+                    {
+                      name = "x-test-header"
+                      value = {
+                        exact       = "test-value"
+                        ignore_case = false
                       }
-                    ]
-                  }
-                ]
-              }
-            ]
+                    }
+                  ]
+                }
+              ]
+            }
           }
         }
       ]

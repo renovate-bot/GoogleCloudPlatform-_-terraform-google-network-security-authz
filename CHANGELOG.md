@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.1](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/compare/v0.6.0...v0.6.1) (2026-06-09)
+
+
+### Bug Fixes
+
+* addinf default ([b8b90fd](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/b8b90fdd318b4092901a620dded4ccada893cd57))
+* adding default values ([7997d8c](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/7997d8c5a0873d6e0e13ab9a3db29ec62fe2cbda))
+
 ## [0.6.0](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/compare/v0.5.2...v0.6.0) (2026-06-09)
 
 

@@ -325,7 +325,7 @@ resource "google_network_security_authz_policy" "policy" {
   }
 
   depends_on = [
-    for i in range(index(local.policy_keys_ordered, each.key)) : 
+    for i in range(index(local.policy_keys_ordered, each.key)) :
     google_network_security_authz_policy.policy[local.policy_keys_ordered[i]]
   ]
 }

@@ -66,7 +66,7 @@ resource "google_network_security_authz_policy" "policy" {
   labels         = try(each.value.labels, {})
 
   target {
-    load_balancing_scheme = try(each.value.load_balancing_scheme, null)
+    load_balancing_scheme = try(each.value.target.load_balancing_scheme, each.value.load_balancing_scheme, null)
     resources             = try(each.value.target.resources, each.value.target_resources, [])
   }
 

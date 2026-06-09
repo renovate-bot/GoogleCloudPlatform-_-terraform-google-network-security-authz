@@ -32,6 +32,9 @@ locals {
 
   final_extensions_config = merge(var.extensions_config, local.local_authz_extension_map_json)
   policy_keys_ordered     = keys(local.final_policies_config)
+  policy_predecessors     = {
+    for i, k in local.policy_keys_sorted : k => i > 0 ? local.policy_keys_sorted[i - 1] : null
+  }
 }
 
 resource "google_network_services_authz_extension" "extension" {
@@ -63,8 +66,12 @@ resource "google_network_security_authz_policy" "policy" {
 
   action         = each.value.action
   policy_profile = try(each.value.policy_profile, "REQUEST_AUTHZ")
-  description    = try(each.value.description, "Managed by ADC")
   labels         = try(each.value.labels, {})
+  description    = format(
+    "%s%s",
+    try(each.value.description, "Managed by ADC"),
+    local.policy_predecessors[each.key] == null ? "" : " (After ${google_network_security_authz_policy.policy[local.policy_predecessors[each.key]].id})"
+  )
 
   target {
     load_balancing_scheme = try(each.value.load_balancing_scheme, null)

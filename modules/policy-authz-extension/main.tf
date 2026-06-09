@@ -69,7 +69,7 @@ resource "google_network_security_authz_policy" "policy" {
   target {
     load_balancing_scheme = try(each.value.load_balancing_scheme, null)
     resources = [
-      for r in each.value.target_resources : 
+      for r in each.value.target_resources :
       index(local.policy_keys_sorted, each.key) == 0 ? r : (google_network_security_authz_policy.policy[local.policy_keys_sorted[index(local.policy_keys_sorted, each.key) - 1]].id != "" ? r : r)
     ]
   }

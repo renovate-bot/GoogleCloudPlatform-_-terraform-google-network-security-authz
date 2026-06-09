@@ -77,7 +77,6 @@ spec:
               model_armor_templates = optional(list(string), [])
               labels                = optional(map(string), {})
             }))
-        required: true
       - name: policies_config
         description: A map of Authz Policies with structured HTTP rules, indexed by name.
         varType: |-
@@ -194,7 +193,6 @@ spec:
                 }))
               })), [])
             }))
-        required: true
       - name: authz_policy_map_json
         description: Json encoded map of authz policy name to authz policy object.
         varType: string

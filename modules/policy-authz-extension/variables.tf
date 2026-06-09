@@ -36,7 +36,7 @@ variable "policies_config" {
   description = "A map of Authz Policies with structured HTTP rules, indexed by name."
   type = map(object({
     action                = string
-    load_balancing_scheme = string
+    load_balancing_scheme = optional(string)
     target_resources      = optional(list(string), [])
     description           = optional(string, "Managed by ADC")
     extension_names       = optional(list(string), [])

@@ -31,7 +31,7 @@ locals {
   local_authz_extension_map_json = { for k, v in local.authz_extension_map_json : k => jsondecode(v) }
 
   final_extensions_config = merge(var.extensions_config, local.local_authz_extension_map_json)
-  policy_keys_ordered     = keys(local.final_policies_config)
+  policy_keys_sorted      = sort(keys(local.final_policies_config))
   policy_predecessors = {
     for i, k in local.policy_keys_sorted : k => i > 0 ? local.policy_keys_sorted[i - 1] : null
   }

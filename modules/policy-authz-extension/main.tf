@@ -32,7 +32,7 @@ locals {
 
   final_extensions_config = merge(var.extensions_config, local.local_authz_extension_map_json)
   policy_keys_sorted      = sort(keys(local.final_policies_config))
-  policy_predecessors = {
+  policy_sequence = {
     for i, k in local.policy_keys_sorted : k => i > 0 ? local.policy_keys_sorted[i - 1] : null
   }
 }
@@ -67,10 +67,9 @@ resource "google_network_security_authz_policy" "policy" {
   action         = each.value.action
   policy_profile = try(each.value.policy_profile, "REQUEST_AUTHZ")
   labels         = try(each.value.labels, {})
-  description = format(
-    "%s%s",
-    try(each.value.description, "Managed by ADC"),
-    local.policy_predecessors[each.key] == null ? "" : " (After ${google_network_security_authz_policy.policy[local.policy_predecessors[each.key]].id})"
+  description = format("%s%s",
+    each.value.description,
+    local.policy_sequence[each.key] == null ? "" : " (Seq: ${google_network_security_authz_policy.policy[local.policy_sequence[each.key]].id})"
   )
 
   target {

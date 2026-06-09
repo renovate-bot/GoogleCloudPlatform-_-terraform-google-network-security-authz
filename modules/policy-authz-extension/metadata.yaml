@@ -205,7 +205,7 @@ spec:
         defaultValue: ""
     outputs:
       - name: extension_ids
-        description: The fully qualified resource names designating the authorization extensions provisioned by the module.
+        description: Map of extension names to their unique resource IDs.
         type:
           - map
           - string
@@ -213,7 +213,7 @@ spec:
         description: Maps each policy name to its assigned extension IDs (if CUSTOM action).
         type: string
       - name: policy_ids
-        description: The fully qualified resource names designating the authorization policies provisioned by the module.
+        description: Map of policy names to their unique resource IDs.
         type:
           - map
           - string

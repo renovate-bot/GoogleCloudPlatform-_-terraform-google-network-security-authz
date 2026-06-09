@@ -68,8 +68,8 @@ module "policy_authz_extension" {
 
 | Name | Description |
 |------|-------------|
-| extension\_ids | The fully qualified resource names designating the authorization extensions provisioned by the module. |
+| extension\_ids | Map of extension names to their unique resource IDs. |
 | policy\_extension\_map | Maps each policy name to its assigned extension IDs (if CUSTOM action). |
-| policy\_ids | The fully qualified resource names designating the authorization policies provisioned by the module. |
+| policy\_ids | Map of policy names to their unique resource IDs. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

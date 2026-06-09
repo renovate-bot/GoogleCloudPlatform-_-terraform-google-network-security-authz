@@ -5,15 +5,16 @@
  * ...
  */
 
-output "policy_ids" {
-  description = "The fully qualified resource names designating the authorization policies provisioned by the module."
-  value       = { for k, v in google_network_security_authz_policy.policy : k => v.id }
+output "extension_ids" {
+  description = "Map of extension names to their unique resource IDs."
+  value = { for k, v in google_network_services_authz_extension.extension : k => v.id }
 }
 
-output "extension_ids" {
-  description = "The fully qualified resource names designating the authorization extensions provisioned by the module."
-  value       = { for k, v in google_network_services_authz_extension.extension : k => v.id }
+output "policy_ids" {
+  description = "Map of policy names to their unique resource IDs."
+  value = { for k, v in google_network_security_authz_policy.policy : k => v.id }
 }
+
 
 output "policy_extension_map" {
   description = "Maps each policy name to its assigned extension IDs (if CUSTOM action)."

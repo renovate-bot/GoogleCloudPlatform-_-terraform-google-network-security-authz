@@ -32,7 +32,7 @@ locals {
 
   final_extensions_config = merge(var.extensions_config, local.local_authz_extension_map_json)
   policy_keys_ordered     = keys(local.final_policies_config)
-  policy_predecessors     = {
+  policy_predecessors = {
     for i, k in local.policy_keys_sorted : k => i > 0 ? local.policy_keys_sorted[i - 1] : null
   }
 }

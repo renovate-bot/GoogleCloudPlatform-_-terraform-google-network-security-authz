@@ -129,7 +129,19 @@ variable "policies_config" {
             ignore_case = optional(bool, false)
           })), [])
           hosts = optional(list(object({
-            exact = string
+            exact       = optional(string)
+            prefix      = optional(string)
+            suffix      = optional(string)
+            contains    = optional(string)
+            ignore_case = optional(bool, false)
+          })), [])
+          headers = optional(list(object({
+            name        = string
+            exact       = optional(string)
+            prefix      = optional(string)
+            suffix      = optional(string)
+            contains    = optional(string)
+            ignore_case = optional(bool, false)
           })), [])
         }))
       }))

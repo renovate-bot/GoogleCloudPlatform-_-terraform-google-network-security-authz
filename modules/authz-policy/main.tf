@@ -236,10 +236,38 @@ resource "google_network_security_authz_policy" "authz_policy" {
                   ignore_case = paths.value.ignore_case
                 }
               }
+
               dynamic "hosts" {
-                for_each = not_operations.value.hosts
+                for_each = not_operations.value.hosts != null ? not_operations.value.paths : []
                 content {
-                  exact = hosts.value.exact
+                  exact       = hosts.value.exact
+                  prefix      = hosts.value.prefix
+                  suffix      = hosts.value.suffix
+                  contains    = hosts.value.contains
+                  ignore_case = hosts.value.ignore_case
+                }
+              }
+
+              dynamic "header_set" {
+                for_each = length(try(not_operations.value.headers, [])) > 0 ? [1] : []
+                content {
+                  dynamic "headers" {
+                    for_each = not_operations.value.headers
+                    content {
+                      name = headers.value.name
+                      # Note: 'value' should also be dynamic to avoid empty value {} blocks
+                      dynamic "value" {
+                        for_each = [1]
+                        content {
+                          exact       = try(headers.value.exact, null)
+                          prefix      = try(headers.value.prefix, null)
+                          suffix      = try(headers.value.suffix, null)
+                          contains    = try(headers.value.contains, null)
+                          ignore_case = try(headers.value.ignore_case, null)
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }

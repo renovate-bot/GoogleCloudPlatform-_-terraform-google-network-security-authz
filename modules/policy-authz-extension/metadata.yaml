@@ -22,7 +22,7 @@ spec:
   info:
     title: Google Cloud Integrated Authorization Policies and Extensions
     source:
-      repo: https://github.com/vandnagarggoogle/terraform-google-network-security-authz.git
+      repo: https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz.git
       sourceType: git
       dir: /modules/policy-authz-extension
     version: 0.5.3
@@ -72,7 +72,7 @@ spec:
               timeout               = optional(string, "0.1s")
               fail_open             = optional(bool, false)
               forward_headers       = optional(list(string), [])
-              wire_format           = optional(string, "EXT_PROC_GRPC")
+              wire_format           = optional(string)
               metadata              = optional(map(string), {})
               model_armor_templates = optional(list(string), [])
               labels                = optional(map(string), {})
@@ -176,7 +176,19 @@ spec:
                       ignore_case = optional(bool, false)
                     })), [])
                     hosts = optional(list(object({
-                      exact = string
+                      exact       = optional(string)
+                      prefix      = optional(string)
+                      suffix      = optional(string)
+                      contains    = optional(string)
+                      ignore_case = optional(bool, false)
+                    })), [])
+                    headers = optional(list(object({
+                      name        = string
+                      exact       = optional(string)
+                      prefix      = optional(string)
+                      suffix      = optional(string)
+                      contains    = optional(string)
+                      ignore_case = optional(bool, false)
                     })), [])
                   }))
                 }))

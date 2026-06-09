@@ -32,9 +32,6 @@ locals {
 
   final_extensions_config = merge(var.extensions_config, local.local_authz_extension_map_json)
   policy_keys_sorted      = sort(keys(local.final_policies_config))
-  policy_sequence = {
-    for i, k in local.policy_keys_sorted : k => i > 0 ? local.policy_keys_sorted[i - 1] : null
-  }
 }
 
 resource "google_network_services_authz_extension" "extension" {
@@ -67,14 +64,14 @@ resource "google_network_security_authz_policy" "policy" {
   action         = each.value.action
   policy_profile = try(each.value.policy_profile, "REQUEST_AUTHZ")
   labels         = try(each.value.labels, {})
-  description = format("%s%s",
-    each.value.description,
-    local.policy_sequence[each.key] == null ? "" : " (Seq: ${google_network_security_authz_policy.policy[local.policy_sequence[each.key]].id})"
-  )
+  description    = try(each.value.description, null)
 
   target {
     load_balancing_scheme = try(each.value.load_balancing_scheme, null)
-    resources             = try(each.value.target.resources, each.value.target_resources, [])
+    resources = [
+      for r in each.value.target_resources : 
+      index(local.policy_keys_sorted, each.key) == 0 ? r : (google_network_security_authz_policy.policy[local.policy_keys_sorted[index(local.policy_keys_sorted, each.key) - 1]].id != "" ? r : r)
+    ]
   }
 
   # Logic for Custom Provider (IAP or Extensions)

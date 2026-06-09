@@ -31,6 +31,7 @@ locals {
   local_authz_extension_map_json = { for k, v in local.authz_extension_map_json : k => jsondecode(v) }
 
   final_extensions_config = merge(var.extensions_config, local.local_authz_extension_map_json)
+  policy_keys_ordered = keys(local.final_policies_config)
 }
 
 resource "google_network_services_authz_extension" "extension" {
@@ -322,4 +323,9 @@ resource "google_network_security_authz_policy" "policy" {
       }
     }
   }
+
+  depends_on = [
+    for i in range(index(local.policy_keys_ordered, each.key)) : 
+    google_network_security_authz_policy.policy[local.policy_keys_ordered[i]]
+  ]
 }

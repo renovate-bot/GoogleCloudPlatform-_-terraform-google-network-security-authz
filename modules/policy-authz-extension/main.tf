@@ -33,6 +33,25 @@ locals {
   final_extensions_config = merge(var.extensions_config, local.local_authz_extension_map_json)
 }
 
+resource "google_network_services_authz_extension" "extension" {
+  for_each = local.final_extensions_config
+  provider = google-beta
+
+  project               = var.project_id
+  location              = var.location
+  name                  = each.key
+  service               = each.value.backend_service
+  authority             = try(each.value.authority, null)
+  load_balancing_scheme = try(each.value.load_balancing_scheme, null)
+  timeout               = try(each.value.timeout, "0.1s")
+  fail_open             = try(each.value.fail_open, false)
+  forward_headers       = try(each.value.forward_headers, null)
+  wire_format           = try(each.value.wire_format, null)
+  description           = try(each.value.description, null)
+  labels                = try(each.value.labels, {})
+  metadata              = try(each.value.metadata, {})
+}
+
 resource "google_network_security_authz_policy" "policy" {
   for_each = local.final_policies_config
   provider = google-beta

@@ -77,6 +77,7 @@ spec:
               model_armor_templates = optional(list(string), [])
               labels                = optional(map(string), {})
             }))
+        defaultValue: {}
       - name: policies_config
         description: A map of Authz Policies with structured HTTP rules, indexed by name.
         varType: |-
@@ -193,6 +194,7 @@ spec:
                 }))
               })), [])
             }))
+        defaultValue: {}
       - name: authz_policy_map_json
         description: Json encoded map of authz policy name to authz policy object.
         varType: string
@@ -203,15 +205,15 @@ spec:
         defaultValue: ""
     outputs:
       - name: extension_ids
-        description: The fully qualified resource names designating the authorization extensions provisioned by the module.
+        description: Map of extension names to their unique resource IDs.
         type:
           - map
           - string
       - name: policy_extension_map
-        description: A JSON string representing a mapping of each authorization policy name to a list of its designated authorization extension resource identifiers.
+        description: Maps each policy name to its assigned extension IDs (if CUSTOM action).
         type: string
       - name: policy_ids
-        description: The fully qualified resource names designating the authorization policies provisioned by the module.
+        description: Map of policy names to their unique resource IDs.
         type:
           - map
           - string

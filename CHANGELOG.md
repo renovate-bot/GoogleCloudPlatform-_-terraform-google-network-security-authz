@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.2](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/compare/v0.6.1...v0.6.2) (2026-06-10)
+
+
+### Bug Fixes
+
+* fixing op null value ([bb32892](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/bb3289208a297e9b63b49294211401c26cc1b426))
+* null output variable fix ([5822437](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/5822437df565666be82b47e60a887d8b185af0b0))
+
 ## [0.6.1](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/compare/v0.6.0...v0.6.1) (2026-06-09)
 
 
